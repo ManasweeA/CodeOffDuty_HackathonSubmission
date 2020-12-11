@@ -43,7 +43,7 @@ function FindRoommates() {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("index-page");
@@ -51,6 +51,92 @@ function FindRoommates() {
     };
   });
   
+  const [data,setData] = useState([])
+    const {state,dispatch} = useContext(UserContext)
+    useEffect(()=>{
+        fetch('/allroommates',{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            setData(result.posts)
+        })
+    },[])
+
+    const connectRoommate = (id)=>{
+        fetch('/roommateconnect',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                postId:id
+            })
+        }).then(res=>res.json())
+        .then(result=>{
+            //console.log(result)
+            const newData = data.map(item=>{
+                if(item._id==result._id)
+                {
+                    return result
+                }
+                else{
+                    return item
+                }
+            })
+            setData(newData)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const unconnectRoommate = (id)=>{
+        fetch('/roommateunconnect',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                postId:id
+            })
+        }).then(res=>res.json())
+        .then(result=>{
+            //console.log(result)
+            const newData = data.map(item=>{
+                if(item._id==result._id)
+                {
+                    return result
+                }
+                else{
+                    return item
+                }
+            })
+            setData(newData)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const deletePost = (postid)=>{
+        fetch(`/roommatedeletepost/${postid}`,{
+            method:"delete",
+            headers:{
+                Authorization:"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            const newData = data.filter(item=>{
+                return item._id !== result._id
+            })
+            setData(newData)
+        })
+    }
+
   return (
     <>
       <IndexNavbar />
@@ -64,96 +150,49 @@ function FindRoommates() {
         <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
         <h1 style = {{ textAlign:"center", marginTop:"60px", marginBottom:"60px" }}>Find Roommates</h1>
         
+
+        {
+            data.map(item=>{
+                return(
+
         <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" top></CardImg>
+            <CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg>
             <CardBody>
-            <CardTitle tag="h4">Card title</CardTitle>
+            <CardTitle tag="h4"><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id :"/profile/"}>{item.postedBy.fullName}</Link></CardTitle>
             <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
+            <div>
+                <h7>{ item.question9 + ", " + item.question12}</h7>
+            </div>
+            <div>
+                <h7>{ item.question10 + ", " + item.question7}</h7>
+            </div>
+                
             </CardText>
+
+            {item.connected.includes(state._id)
+            ?  
             <Button
-                color="primary"
+                color="danger"
                 href="#pablo"
-                onClick={e => e.preventDefault()}
+                onClick={()=>{unconnectRoommate(item._id)}}
             >
-                Go somewhere
+                Unconnect
             </Button>
+            :
+            <Button
+                color="info"
+                href="#pablo"
+                onClick={()=>{connectRoommate(item._id)}}
+            >
+                Connect
+            </Button>
+            }
             </CardBody>
         </Card>
 
-        <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" top></CardImg>
-            <CardBody>
-            <CardTitle tag="h4">Card title</CardTitle>
-            <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-            </CardText>
-            <Button
-                color="primary"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
-            >
-                Go somewhere
-            </Button>
-            </CardBody>
-        </Card>
-
-        <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" top></CardImg>
-            <CardBody>
-            <CardTitle tag="h4">Card title</CardTitle>
-            <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-            </CardText>
-            <Button
-                color="primary"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
-            >
-                Go somewhere
-            </Button>
-            </CardBody>
-        </Card>
-        
-        <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" top></CardImg>
-            <CardBody>
-            <CardTitle tag="h4">Card title</CardTitle>
-            <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-            </CardText>
-            <Button
-                color="primary"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
-            >
-                Go somewhere
-            </Button>
-            </CardBody>
-        </Card>
-
-        <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" top></CardImg>
-            <CardBody>
-            <CardTitle tag="h4">Card title</CardTitle>
-            <CardText>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-            </CardText>
-            <Button
-                color="primary"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
-            >
-                Go somewhere
-            </Button>
-            </CardBody>
-        </Card>
-        
+        )
+            })
+        }
        
         
         </Col>
