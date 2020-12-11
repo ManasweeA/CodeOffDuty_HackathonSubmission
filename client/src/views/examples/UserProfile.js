@@ -43,7 +43,7 @@ function UserProfilePage() {
     const {userid} = useParams()
     const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
     //const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
-    //console.log(userid)
+    console.log(userid)
     useEffect(()=>{
         fetch(`/user/${userid}`,{
             headers:{
@@ -164,8 +164,8 @@ function UserProfilePage() {
                 Follow
               </Button>
               :
-              <Button className="btn-round" color="info" onClick={()=>unfollowUser()} size="lg">
-                Follow
+              <Button className="btn-round" color="danger" onClick={()=>unfollowUser()} size="lg">
+                UnFollow
               </Button>
             }
               

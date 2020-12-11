@@ -182,7 +182,7 @@ function RentProperty() {
                 return(
         
         <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg>
+        <Link to={"/property-detailed-page/"+item._id }><CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg></Link>
             <CardBody>
 
             {item.likes.includes(state._id)

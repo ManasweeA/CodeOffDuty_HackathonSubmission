@@ -159,6 +159,8 @@ function FindRoommates() {
             <CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg>
             <CardBody>
             <CardTitle tag="h4"><Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id :"/profile/"}>{item.postedBy.fullName}</Link></CardTitle>
+
+            
             <CardText>
             <div>
                 <h7>{ item.question9 + ", " + item.question12}</h7>
@@ -169,7 +171,8 @@ function FindRoommates() {
                 
             </CardText>
 
-            {item.connected.includes(state._id)
+           {item.postedBy._id != state._id && 
+            item.connected.includes(state._id)
             ?  
             <Button
                 color="danger"
@@ -178,7 +181,7 @@ function FindRoommates() {
             >
                 Unconnect
             </Button>
-            :
+            : item.postedBy._id != state._id && 
             <Button
                 color="info"
                 href="#pablo"
@@ -186,7 +189,13 @@ function FindRoommates() {
             >
                 Connect
             </Button>
-            }
+            
+           }
+
+           {item.postedBy._id == state._id
+            && 
+            <i style={{ padding:"10px", fontSize:"20px" }} className="now-ui-icons files_box" onClick={()=>deletePost(item._id)}></i>
+           }
             </CardBody>
         </Card>
 

@@ -265,7 +265,7 @@ router.put('/comment',requireLogin,(req,res)=>{
             return res.status(422).json({error:err})
         }
         else{
-            res.json(result)
+            res.json({house:result})
         }
     })
 })
@@ -285,6 +285,19 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
                   console.log(err)
               })
         }
+    })
+})
+
+
+router.get('/house/:id',requireLogin,(req,res)=>{
+    Post.findOne({_id:req.params.id})
+    .populate("postedBy","_id fullName")
+    .select("-password")
+    .then(house=>{
+        res.json({house})
+        })
+    .catch(err=>{
+        return res.status(404).json({error:"Property not found"})
     })
 })
 
