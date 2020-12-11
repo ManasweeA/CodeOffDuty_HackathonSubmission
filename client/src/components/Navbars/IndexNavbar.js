@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useContext} from 'react';
+import {Link,useHistory} from 'react-router-dom'
+import {UserContext} from '../../App';
 // reactstrap components
 import {
   Button,
@@ -39,6 +40,147 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
+
+  const {state,dispatch} = useContext(UserContext)
+  const history = useHistory()
+
+  const renderList = ()=>{
+    if (state){
+      return [
+        <NavItem>
+        <NavLink
+          href="#pablo"
+          onClick={(e) => {
+            e.preventDefault();
+            document
+              .getElementById("download-section")
+              .scrollIntoView();
+          }}
+        >
+          <i className="now-ui-icons arrows-1_cloud-download-93"></i>
+          <p>About</p>
+        </NavLink>
+      </NavItem>,
+      
+      <UncontrolledDropdown nav>
+        <DropdownToggle
+          caret
+          color="default"
+          href="#pablo"
+          nav
+          onClick={(e) => e.preventDefault()}
+        >
+          <i className="now-ui-icons shopping_shop"></i>
+          <p>Houses</p>
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem to="/create-post" tag={Link}>
+            <i className="now-ui-icons gestures_tap-01"></i>
+            Post Property
+          </DropdownItem>
+          <DropdownItem
+            to="/rent-property" tag={Link}
+          >
+            <i className="now-ui-icons objects_key-25"></i>
+            Rent Property
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>,
+
+      <UncontrolledDropdown nav>
+        <DropdownToggle
+          caret
+          color="default"
+          href="#pablo"
+          nav
+          onClick={(e) => e.preventDefault()}
+        >
+          <i className="now-ui-icons users_circle-08"></i>
+          <p>Roommates</p>
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem to="/roommate-post" tag={Link}>
+            <i className="now-ui-icons objects_spaceship"></i>
+            Post Roommate
+          </DropdownItem>
+          <DropdownItem
+            to="/find-roommates" tag={Link}
+          >
+            <i className="now-ui-icons objects_planet"></i>
+            Find Roommate
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>,
+
+      <NavItem>
+      <Link to="/messages">
+        <NavLink
+        >
+          <i className="now-ui-icons ui-2_chat-round"></i>
+          <p>Messages</p>
+        </NavLink>
+        </Link>
+      </NavItem>,
+
+      <NavItem>
+        <NavLink
+          href="#pablo"
+          onClick={(e) => {
+            e.preventDefault();
+            document
+              .getElementById("download-section")
+              .scrollIntoView();
+          }}
+        >
+          <i className="now-ui-icons users_single-02"></i>
+          <p>Profile</p>
+        </NavLink>
+      </NavItem>,
+
+      <NavItem>
+      
+        <Button
+          className="nav-link btn-danger btn-round"
+          color="danger"
+          id="upgrade-to-pro"
+          onClick={()=>{
+            localStorage.clear()
+            dispatch({type:"CLEAR"})
+            history.push('/signin')
+          }}
+        >
+          <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
+          <p>SignOut</p>
+        </Button>
+        <UncontrolledTooltip target="#upgrade-to-pro">
+          SignOut of Tenouse
+        </UncontrolledTooltip>
+      </NavItem>,
+      ]
+    }
+    else{
+      return [
+        <NavItem>
+          <Link to="/signin">
+            <Button
+              className="nav-link btn-neutral btn-round"
+              color="info"
+              id="upgrade-to-pro"
+              
+            >
+              <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
+              <p>SignUp/SignIn</p>
+            </Button>
+            </Link>
+            <UncontrolledTooltip target="#upgrade-to-pro">
+              SignIn to experience the most amazing features
+            </UncontrolledTooltip>
+        </NavItem>
+      ]
+    }
+  }
+
   return (
     <>
       {collapseOpen ? (
@@ -88,112 +230,9 @@ function IndexNavbar() {
             navbar
           >
             <Nav navbar>
-              <NavItem>
-                <NavLink
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
-                  }}
-                >
-                  <i className="now-ui-icons arrows-1_cloud-download-93"></i>
-                  <p>About</p>
-                </NavLink>
-              </NavItem>
               
-              <UncontrolledDropdown nav>
-                <DropdownToggle
-                  caret
-                  color="default"
-                  href="#pablo"
-                  nav
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <i className="now-ui-icons shopping_shop"></i>
-                  <p>Houses</p>
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem to="/create-post" tag={Link}>
-                    <i className="now-ui-icons gestures_tap-01"></i>
-                    Post Property
-                  </DropdownItem>
-                  <DropdownItem
-                    to="/rent-property" tag={Link}
-                  >
-                    <i className="now-ui-icons objects_key-25"></i>
-                    Rent Property
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
 
-              <UncontrolledDropdown nav>
-                <DropdownToggle
-                  caret
-                  color="default"
-                  href="#pablo"
-                  nav
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <i className="now-ui-icons users_circle-08"></i>
-                  <p>Roommates</p>
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem to="/roommate-post" tag={Link}>
-                    <i className="now-ui-icons objects_spaceship"></i>
-                    Post Roommate
-                  </DropdownItem>
-                  <DropdownItem
-                    to="/find-roommates" tag={Link}
-                  >
-                    <i className="now-ui-icons objects_planet"></i>
-                    Find Roommate
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-
-              <NavItem>
-              <Link to="/messages">
-                <NavLink
-                >
-                  <i className="now-ui-icons ui-2_chat-round"></i>
-                  <p>Messages</p>
-                </NavLink>
-                </Link>
-              </NavItem>
-
-              <NavItem>
-                <NavLink
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
-                  }}
-                >
-                  <i className="now-ui-icons users_single-02"></i>
-                  <p>Profile</p>
-                </NavLink>
-              </NavItem>
-
-              <NavItem>
-              <Link to="/signin">
-                <Button
-                  className="nav-link btn-neutral btn-round"
-                  color="info"
-                  id="upgrade-to-pro"
-                  
-                >
-                  <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                  <p>SignUp/SignIn</p>
-                </Button>
-                </Link>
-                <UncontrolledTooltip target="#upgrade-to-pro">
-                  SignIn to experience the most amazing features
-                </UncontrolledTooltip>
-              </NavItem>
+            {renderList()}
               
               
             </Nav>

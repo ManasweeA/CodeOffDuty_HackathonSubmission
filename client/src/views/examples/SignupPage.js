@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import {Link,useHistory} from 'react-router-dom';
-import M from 'materialize-css';
 // reactstrap components
 import {
   Button,
@@ -84,7 +83,15 @@ function SignupPage() {
   const uploadFields = ()=>{
       // Email Regex : http://emailregex.com/
       if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-          M.toast({html: "Invalid Email", classes:"#c62828 red darken-3"})
+        toast.error("Invalid Email", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
           return
       }
       // setfullName(firstName + " " + lastName)

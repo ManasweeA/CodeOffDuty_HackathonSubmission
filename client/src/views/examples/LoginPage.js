@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState,useContext} from 'react';
+import {Link, useHistory} from 'react-router-dom';
+import {UserContext} from '../../App';
 // reactstrap components
 import {
   Button,
@@ -41,6 +42,68 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const {state, dispatch} = useContext(UserContext)
+  const history = useHistory()
+  const [password,setPassword] = useState("")
+  const [email,setEmail] = useState("")
+  const PostData = ()=>{
+      // Email Regex : http://emailregex.com/
+      if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+        toast.error("Invalid Email", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+          return
+      }
+      fetch("/signin", {
+          method:"post",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+              password,
+              email
+          })
+      }).then(res=>res.json())
+      .then(data=>{
+          console.log(data)
+          if(data.error){
+            toast.error(data.error, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+          }
+          else{
+              localStorage.setItem("jwt", data.token)
+              localStorage.setItem("user", JSON.stringify(data.user))
+              dispatch({type:"USER", payload:data.user})
+              toast.success("Signed-In Successfully", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+              history.push('/')
+          }
+      }).catch(err=>{
+          console.log(err)
+      })
+  }
+
   return (
     <>
       <IndexNavbar />
@@ -80,9 +143,11 @@ function LoginPage() {
                       </InputGroupAddon>
                       <Input
                         placeholder="Email..."
-                        type="text"
+                        type="email"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
                       ></Input>
                     </InputGroup>
                     <InputGroup
@@ -101,6 +166,8 @@ function LoginPage() {
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
                       ></Input>
                     </InputGroup>
                   </CardBody>
@@ -109,9 +176,8 @@ function LoginPage() {
                       block
                       className="btn-round"
                       color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
                       size="lg"
+                      onClick={()=>PostData()}
                     >
                       Sign In
                     </Button>
