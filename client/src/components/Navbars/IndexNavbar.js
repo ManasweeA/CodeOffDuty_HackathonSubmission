@@ -111,19 +111,18 @@ function IndexNavbar() {
                   nav
                   onClick={(e) => e.preventDefault()}
                 >
-                  <i className="now-ui-icons design_app mr-1"></i>
+                  <i className="now-ui-icons shopping_shop"></i>
                   <p>Houses</p>
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem to="/index" tag={Link}>
-                    <i className="now-ui-icons business_chart-pie-36 mr-1"></i>
+                  <DropdownItem to="/create-post" tag={Link}>
+                    <i className="now-ui-icons gestures_tap-01"></i>
                     Post Property
                   </DropdownItem>
                   <DropdownItem
-                    href="https://demos.creative-tim.com/now-ui-kit-react/#/documentation/introduction?ref=nukr-index-navbar"
-                    target="_blank"
+                    to="/rent-property" tag={Link}
                   >
-                    <i className="now-ui-icons design_bullet-list-67 mr-1"></i>
+                    <i className="now-ui-icons objects_key-25"></i>
                     Rent Property
                   </DropdownItem>
                 </DropdownMenu>
@@ -137,19 +136,18 @@ function IndexNavbar() {
                   nav
                   onClick={(e) => e.preventDefault()}
                 >
-                  <i className="now-ui-icons design_app mr-1"></i>
+                  <i className="now-ui-icons users_circle-08"></i>
                   <p>Roommates</p>
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem to="/index" tag={Link}>
-                    <i className="now-ui-icons business_chart-pie-36 mr-1"></i>
+                  <DropdownItem to="/roommate-post" tag={Link}>
+                    <i className="now-ui-icons objects_spaceship"></i>
                     Post Roommate
                   </DropdownItem>
                   <DropdownItem
-                    href="https://demos.creative-tim.com/now-ui-kit-react/#/documentation/introduction?ref=nukr-index-navbar"
-                    target="_blank"
+                    to="/find-roommates" tag={Link}
                   >
-                    <i className="now-ui-icons design_bullet-list-67 mr-1"></i>
+                    <i className="now-ui-icons objects_planet"></i>
                     Find Roommate
                   </DropdownItem>
                 </DropdownMenu>
@@ -165,7 +163,7 @@ function IndexNavbar() {
                       .scrollIntoView();
                   }}
                 >
-                  <i className="now-ui-icons arrows-1_cloud-download-93"></i>
+                  <i className="now-ui-icons ui-2_chat-round"></i>
                   <p>Messages</p>
                 </NavLink>
               </NavItem>
@@ -180,7 +178,7 @@ function IndexNavbar() {
                       .scrollIntoView();
                   }}
                 >
-                  <i className="now-ui-icons arrows-1_cloud-download-93"></i>
+                  <i className="now-ui-icons users_single-02"></i>
                   <p>Profile</p>
                 </NavLink>
               </NavItem>
