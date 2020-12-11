@@ -1,4 +1,4 @@
 module.exports={
-    MONGOURI: "mongodb+srv://tenrox123:tenrox@cluster0.oq0up.mongodb.net/tenrox?retryWrites=true&w=majority",
+    MONGOURI: "mongodb+srv://tenouse:tenouse@cluster0.zzpv7.mongodb.net/tenouse?retryWrites=true&w=majority",
     JWT_SECRET:"tenroxtesttoken"
 }

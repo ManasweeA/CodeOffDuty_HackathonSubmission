@@ -44,7 +44,7 @@ router.post('/signup', (req,res)=>{
     
             user.save()
             .then(user=>{
-                res.json({message:"Saved Successfully"})
+                res.json({message:"Account Created Successfully"})
             })
             .catch(err=>{
                 console.log(err)

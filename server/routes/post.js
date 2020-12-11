@@ -5,6 +5,8 @@ const Post = mongoose.model("Post")
 const requireLogin = require('../middleware/requireLogin')
 const { route } = require('./auth')
 
+const path = require("path");
+
 router.get('/allpost', requireLogin, (req,res)=>{
     Post.find()
 
@@ -47,8 +49,8 @@ router.get('/mypost',requireLogin,(req,res)=>{
 })
 
 router.post('/createpost', requireLogin, (req,res)=>{
-    const {title, body, pic} = req.body
-    if(!title || !body || !pic){
+    const {pic1, pic2, pic3, question1, question2, question3, question4, question5, question6, question7, question8, question9} = req.body
+    if(!pic1 && !pic2 && !pic3 && !question1 && !question2, !question3, !question4, !question5, !question6, !question7, !question8, !question9){
         return res.status(422).json({error:"Please add all the fields"})
     }
     //console.log(req.user)
@@ -57,18 +59,34 @@ router.post('/createpost', requireLogin, (req,res)=>{
     // Remove the password while storing the postedBy user
     req.user.password = undefined
 
-    const post = new Post({
-        title,
-        body,
-        photo:pic,
-        postedBy:req.user
-    })
-    post.save().then(result=>{
-        res.json({post:result})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
+    console.log(JSON.stringify({
+        pic1,
+        pic2,
+        pic3,
+        question1,
+        question2,
+        question3,
+        question4,
+        question5,
+        question6,
+        question7,
+        question8,
+        question9
+    }))
+    res.json("Successful")
+
+    // const post = new Post({
+    //     title,
+    //     body,
+    //     photo:pic,
+    //     postedBy:req.user
+    // })
+    // post.save().then(result=>{
+    //     res.json({post:result})
+    // })
+    // .catch(err=>{
+    //     console.log(err)
+    // })
 })
 
 router.put('/like',requireLogin,(req,res)=>{
