@@ -204,7 +204,7 @@ function RentProperty() {
             
             <CardText>
                 {"Rs " + item.question3}
-                <h6> - {item.postedBy.fullName}</h6>
+                <h6> - <Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id :"/profile/"}>{item.postedBy.fullName}</Link></h6>
             </CardText>
             
             </CardBody>

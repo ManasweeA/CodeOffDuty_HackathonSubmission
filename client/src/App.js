@@ -39,6 +39,7 @@ import FindRoommates from "views/examples/FindRoommates";
 import Messages from "views/examples/Messages";
 
 import {reducer,initialState} from './reducers/userReducer'
+import UserProfilePage from 'views/examples/UserProfile';
 
 export const UserContext = createContext()
 
@@ -70,7 +71,7 @@ const Routing = ()=>{
           render={(props) => <LandingPage {...props} />}
         />
         <Route
-          path="/profile-page"
+          exact path="/profile"
           render={(props) => <ProfilePage {...props} />}
         />
         <Route
@@ -104,6 +105,10 @@ const Routing = ()=>{
         <Route
           path="/messages"
           render={(props) => <Messages {...props} />}
+        />
+        <Route
+          path="/profile/:userid"
+          render={(props) => <UserProfilePage {...props} />}
         />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />

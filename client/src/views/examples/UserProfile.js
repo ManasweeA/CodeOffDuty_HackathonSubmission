@@ -1,5 +1,6 @@
 import React,{useEffect, useState, useContext} from 'react';
 import {UserContext} from '../../App';
+import {useParams} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -19,7 +20,7 @@ import {
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
-function ProfilePage() {
+function UserProfilePage() {
   const [pills, setPills] = React.useState("2");
   let pageHeader = React.createRef();
 
@@ -36,68 +37,88 @@ function ProfilePage() {
     };
   }, []);
 
-  const [mypics,setPics] = useState([])
-  const {state,dispatch} = useContext(UserContext)
-  const [image,setImage] = useState("")
-  const [url,setUrl] = useState("")
-  useEffect(()=>{
-      fetch('/mypost',{
-          headers:{
-              "Authorization":"Bearer "+localStorage.getItem("jwt")
-          }
-      }).then(res=>res.json())
-      .then(result=>{
-          //console.log(result)
-          setPics(result.mypost)
-      })
-  },[])
+  const [userProfile,setProfile] = useState(null)
+    //const [showfollow,setShowFollow] = useState(true)
+    const {state,dispatch} = useContext(UserContext)
+    const {userid} = useParams()
+    const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
+    //const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
+    //console.log(userid)
+    useEffect(()=>{
+        fetch(`/user/${userid}`,{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            setProfile(result)
+        })
+    },[])
 
-  useEffect(()=>{
-      if(image){
-          const data = new FormData()
-          data.append("file", image)
-          data.append("upload_preset", "tenrox")
-          data.append("cloud_name", "dduj3fext")
-          fetch("https://api.cloudinary.com/v1_1/dduj3fext/image/upload",{
-              method:"post",
-              body:data
-          })
-          .then(res=>res.json())
-          .then(data=>{
-      
-          
-              fetch('/updatepic',{
-                  method:"put",
-                  headers:{
-                      "Content-Type":"application/json",
-                      "Authorization":"Bearer "+localStorage.getItem("jwt")
-                  },
-                  body:JSON.stringify({
-                      pic:data.url
-                  })
-              }).then(res=>res.json())
-              .then(result=>{
-                  console.log(result)
-                  localStorage.setItem("user",JSON.stringify({...state,pic:result.pic}))
-                  dispatch({type:"UPDATEPIC",payload:result.pic})
-                  //window.location.reload()
-              })
-          
-          })
-          .catch(err=>{
-              console.log(err)
-          })
-          }
-  },[image])
-  const updatePhoto = (file)=>{
-      setImage(file)
-  }
+    const followUser = ()=>{
+        fetch('/follow',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                followId:userid
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            dispatch({type:"UPDATE", payload:{following:data.following, followers:data.followers}})
+            localStorage.setItem("user", JSON.stringify(data))
+            setProfile((prevState)=>{
+                return {
+                    ...prevState,
+                    user:{
+                        ...prevState.user,
+                        followers:[...prevState.user.followers, data._id]
+                    }
+                }
+            })
+            setShowFollow(false)
+        })
+    }
+
+    const unfollowUser = ()=>{
+        fetch('/unfollow',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                unfollowId:userid
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            dispatch({type:"UPDATE", payload:{following:data.following, followers:data.followers}})
+            localStorage.setItem("user", JSON.stringify(data))
+            setProfile((prevState)=>{
+                const newFollower = prevState.user.followers.filter(item=>item != data._id)
+                return {
+                    ...prevState,
+                    user:{
+                        ...prevState.user,
+                        followers:newFollower
+                    }
+                }
+            })
+            setShowFollow(true)
+        })
+    }
 
   
 
   return (
     <>
       <IndexNavbar />
+      { userProfile?
       <div className="wrapper">
         <>
       <div
@@ -113,22 +134,22 @@ function ProfilePage() {
         ></div>
         <Container>
           <div className="photo-container">
-            <img alt="..." src={state?state.pic:"loading"}></img>
+            <img alt="..." src={userProfile.user.pic}></img>
           </div>
-          <h3 className="title">{state?state.fullName:"loading"}</h3>
-          <p className="category">{state?state.email:"loading"}</p>
+          <h3 className="title">{userProfile.user.fullName}</h3>
+          <p className="category">{userProfile.user.email}</p>
           <div className="content">
             <div className="social-description">
-              <h2>{mypics.length}</h2>
+              <h2>{userProfile.posts.length}</h2>
               <p>House Posts</p>
             </div>
             
             <div className="social-description">
-              <h2>{state?state.followers.length:"0"}</h2>
+              <h2>{userProfile.user.followers.length}</h2>
               <p>Followers</p>
             </div>
             <div className="social-description">
-              <h2>{state?state.following.length:"0"}</h2>
+              <h2>{userProfile.user.following.length}</h2>
               <p>Following</p>
             </div>
           </div>
@@ -138,7 +159,15 @@ function ProfilePage() {
         <div className="section">
           <Container>
             <div className="button-container">
-              
+            {showfollow?
+              <Button className="btn-round" color="info" onClick={()=>followUser()} size="lg">
+                Follow
+              </Button>
+              :
+              <Button className="btn-round" color="info" onClick={()=>unfollowUser()} size="lg">
+                Follow
+              </Button>
+            }
               
             </div>
             <h3 className="title">About me</h3>
@@ -203,7 +232,7 @@ function ProfilePage() {
                     <Row className="collections">
 
                     {
-                    mypics.map(item=>{
+                    userProfile.posts.map(item=>{
                     return(
                         <img
                           key={item._id}
@@ -282,10 +311,15 @@ function ProfilePage() {
             </Row>
           </Container>
         </div>
+        
+        
         <DarkFooter />
       </div>
+      :
+      <h2>loading ...</h2>
+    }
     </>
   );
 }
 
-export default ProfilePage;
+export default UserProfilePage;

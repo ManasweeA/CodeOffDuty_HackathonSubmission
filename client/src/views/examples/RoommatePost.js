@@ -100,25 +100,25 @@ function RoommatePost() {
                 <legend>How many roommates do you prefer ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio2" />{' '}
                     1-3
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio2" />{' '}
                     4-6
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio2" />{' '}
                     7-10
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio2" />{' '}
                     Cool with any
                 </Label>
                 </FormGroup>
@@ -129,32 +129,55 @@ function RoommatePost() {
                 <legend>What is your current status ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio3" />{' '}
                     Student
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio3" />{' '}
                     Employee
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio3" />{' '}
                     Self Employed
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio3" />{' '}
                     Free Lancer
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio3" />{' '}
                     Tourist
+                </Label>
+                </FormGroup>
+            
+            </FormGroup>
+
+            <FormGroup tag="fieldset" style={{ textAlign:"left", marginBottom:"60px" }}>
+                <legend>What is your Roommate gender preference ?</legend>
+                <FormGroup check>
+                <Label check>
+                    <Input type="radio" name="radio4" />{' '}
+                    Male
+                </Label>
+                </FormGroup>
+                <FormGroup check>
+                <Label check>
+                    <Input type="radio" name="radio4" />{' '}
+                    Female
+                </Label>
+                </FormGroup>
+                <FormGroup check>
+                <Label check>
+                    <Input type="radio" name="radio4" />{' '}
+                    Any
                 </Label>
                 </FormGroup>
             
@@ -164,31 +187,31 @@ function RoommatePost() {
                 <legend>What is your Roommate preference ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio5" />{' '}
                     Student
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio5" />{' '}
                     Employee
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio5" />{' '}
                     Self Employed
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio5" />{' '}
                     Free Lancer
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio5" />{' '}
                     Tourist
                 </Label>
                 </FormGroup>
@@ -199,13 +222,13 @@ function RoommatePost() {
                 <legend>What is your Roommate alcohol preference ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio6" />{' '}
                     Shouldn't consume alcohol or any harmful/illegal substance
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio6" />{' '}
                     Cool with anything
                 </Label>
                 </FormGroup>
@@ -216,13 +239,13 @@ function RoommatePost() {
                 <legend>What is your marital status ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio7" />{' '}
                     Married
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio7" />{' '}
                     Not married
                 </Label>
                 </FormGroup>
@@ -233,13 +256,13 @@ function RoommatePost() {
                 <legend>What is your Roommate marital preference ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio8" />{' '}
                     Married
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio8" />{' '}
                     Not Married
                 </Label>
                 </FormGroup>
@@ -255,31 +278,31 @@ function RoommatePost() {
                 <legend>What is your Roommate age preference ?</legend>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio9" />{' '}
                     18-25
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio9" />{' '}
                     26-30
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio9" />{' '}
                     31-45
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio9" />{' '}
                     46-60
                 </Label>
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio1" />{' '}
+                    <Input type="radio" name="radio9" />{' '}
                     Cool with any
                 </Label>
                 </FormGroup>

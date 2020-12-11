@@ -124,18 +124,13 @@ function IndexNavbar() {
       </NavItem>,
 
       <NavItem>
+      <Link to="/profile/">
         <NavLink
-          href="#pablo"
-          onClick={(e) => {
-            e.preventDefault();
-            document
-              .getElementById("download-section")
-              .scrollIntoView();
-          }}
         >
           <i className="now-ui-icons users_single-02"></i>
           <p>Profile</p>
         </NavLink>
+        </Link>
       </NavItem>,
 
       <NavItem>
