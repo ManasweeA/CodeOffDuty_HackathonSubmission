@@ -177,7 +177,8 @@ function PropertyDetailedPage() {
             e.target[0].value = ""
         }}>
             <Label for="exampleText">Enter your Review</Label>
-            <Input type="text" name="text" id="exampleText" style={{ marginBottom:"60px" }} />
+            <Input type="textarea" name="text" id="exampleText" />
+            <Button color="info" type="submit" style={{ marginBottom:"60px" }}>Post</Button>
         </form>
 
         {

@@ -272,6 +272,7 @@ router.put('/comment',requireLogin,(req,res)=>{
 
 router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
+    .populate("comments.postedBy","_id fullName")
     .populate("postedBy","_id")
     .exec((err,post)=>{
         if(err || !post){
@@ -291,6 +292,7 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
 
 router.get('/house/:id',requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.id})
+    .populate("comments.postedBy","_id fullName")
     .populate("postedBy","_id fullName")
     .select("-password")
     .then(house=>{
