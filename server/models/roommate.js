@@ -59,6 +59,10 @@ const roommateSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    question14:{
+        type:String,
+        required:true
+    },
     connected:[{type:ObjectId,ref:"User"}],
     postedBy:{
         type:ObjectId,

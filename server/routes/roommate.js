@@ -50,9 +50,9 @@ router.get('/myroommatepost',requireLogin,(req,res)=>{
 })
 
 router.post('/createroommatepost', requireLogin, async(req,res)=>{
-    const {pic1, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13} = req.body
+    const {pic1, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14} = req.body
 
-    if(!pic1 && !question1 && !question2 && !question3 && !question4 && !question5 && !question6 && !question7 && !question8 && !question9 && !question10 && !question11 && !question12 && !question13){
+    if(!pic1 && !question1 && !question2 && !question3 && !question4 && !question5 && !question6 && !question7 && !question8 && !question9 && !question10 && !question11 && !question12 && !question13 && !question14){
         return res.status(422).json({error:"Please add all the fields"})
     }
     //console.log(req.user)
@@ -77,6 +77,7 @@ router.post('/createroommatepost', requireLogin, async(req,res)=>{
         question11,
         question12,
         question13,
+        question14,
         postedBy:req.user
     })
     post.save().then(result=>{
