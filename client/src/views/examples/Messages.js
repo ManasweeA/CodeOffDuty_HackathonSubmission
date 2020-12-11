@@ -72,10 +72,17 @@ function Messages() {
         
 
         <Card className="card-nav-tabs card-plain">
-        <CardHeader className="card-header-danger">
+
+        <Col className="ml-auto mr-auto" md="4" style={{ textAlign:"center" }}>
+        <CardHeader className="card-header-danger" className="flex-column">
+
+
           <div className="nav-tabs-navigation">
             <div className="nav-tabs-wrapper">
-              <Nav data-tabs="tabs" tabs>
+
+
+
+              <Nav data-tabs="tabs" tabs >
                 <NavItem>
                   <NavLink
                     className={plainTabs === "1" ? "active" : ""}
@@ -116,6 +123,9 @@ function Messages() {
             </div>
           </div>
         </CardHeader>
+        </Col>
+
+        <Col className="ml-auto mr-auto" md="8" style={{ textAlign:"center" }}>        
         <CardBody>
           <TabContent
             className="text-center"
@@ -156,6 +166,7 @@ function Messages() {
             </TabPane>
           </TabContent>
         </CardBody>
+        </Col>    
       </Card>
 
         </Col>
