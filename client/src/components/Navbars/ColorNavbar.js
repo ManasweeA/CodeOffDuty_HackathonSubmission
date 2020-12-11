@@ -17,7 +17,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-function IndexNavbar() {
+function ColorNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -50,7 +50,7 @@ function IndexNavbar() {
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
+      <Navbar className="bg-info" expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
             <NavbarBrand
@@ -204,4 +204,4 @@ function IndexNavbar() {
   );
 }
 
-export default IndexNavbar;
+export default ColorNavbar;

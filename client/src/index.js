@@ -36,6 +36,7 @@ import RentProperty from "views/examples/RentProperty";
 import PropertyDetailedPage from "views/examples/PropertyDetailedPage";
 import RoommatePost from "views/examples/RoommatePost";
 import FindRoommates from "views/examples/FindRoommates";
+import Messages from "views/examples/Messages";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -81,6 +82,10 @@ ReactDOM.render(
         <Route
           path="/find-roommates"
           render={(props) => <FindRoommates {...props} />}
+        />
+        <Route
+          path="/messages"
+          render={(props) => <Messages {...props} />}
         />
         <Redirect to="/index" />
         <Redirect from="/" to="/index" />

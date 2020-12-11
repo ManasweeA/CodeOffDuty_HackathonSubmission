@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -151,13 +151,13 @@ function SignupPage() {
                     </Button>
                     <div className="pull-left">
                       <h6>
-                        <a
+                        <Link
                           className="link"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          to="/login-page"
+                          
                         >
                           Already have an account?
-                        </a>
+                        </Link>
                       </h6>
                     </div>
                     <div className="pull-right">
