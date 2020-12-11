@@ -179,7 +179,7 @@ function IndexNavbar() {
               </NavItem>
 
               <NavItem>
-              <Link to="/login-page">
+              <Link to="/signin">
                 <Button
                   className="nav-link btn-neutral btn-round"
                   color="info"

@@ -16,9 +16,16 @@ import {
   Col,
 } from "reactstrap";
 
+// Toast
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
+
+toast.configure()
 
 function LoginPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -45,6 +52,7 @@ function LoginPage() {
           }}
         ></div>
         <div className="content">
+        
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
@@ -111,7 +119,7 @@ function LoginPage() {
                       <h6>
                         <Link
                           className="link"
-                          to="/signup-page"
+                          to="/signup"
                           
                         >
                           Create Account

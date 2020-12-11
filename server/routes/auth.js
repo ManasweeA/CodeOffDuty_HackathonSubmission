@@ -20,6 +20,8 @@ router.get('/protected',requireLogin,(req,res)=>{
 router.post('/signup', (req,res)=>{
     //console.log(req.body)
     const {firstName, lastName, fullName, email, password, pic} = req.body
+    console.log("Called")
+    console.log(req.body)
     if (!email || !password || !firstName || !lastName || !fullName){
         return res.status(422).json({error:"Please enter values in all the fields"})
     }

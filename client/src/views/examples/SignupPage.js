@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState,useEffect} from 'react';
+import {Link,useHistory} from 'react-router-dom';
+import M from 'materialize-css';
 // reactstrap components
 import {
   Button,
@@ -14,12 +15,20 @@ import {
   InputGroup,
   Container,
   Col,
+  Alert,
+  UncontrolledAlert,
 } from "reactstrap";
+
+// Toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // core components
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
+
+toast.configure()
 
 function SignupPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -37,6 +46,104 @@ function SignupPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const history = useHistory()
+  const [firstName,setfirstName] = useState("")
+  const [lastName,setlastName] = useState("")
+  const [fullName,setfullName] = useState("")
+  const [password,setPassword] = useState("")
+  const [email,setEmail] = useState("")
+  const [image,setImage] = useState("")
+  const [url,setUrl] = useState(undefined)
+
+  useEffect(()=>{
+      if(url){
+          uploadFields()
+      }
+  },[url])
+
+  const uploadPic = ()=>{
+      const data = new FormData()
+      data.append("file", image)
+      data.append("upload_preset", "tenrox")
+      data.append("cloud_name", "dduj3fext")
+      fetch("https://api.cloudinary.com/v1_1/dduj3fext/image/upload",{
+          method:"post",
+          body:data
+      })
+      .then(res=>res.json())
+      .then(data=>{
+          //console.log(data)
+          setUrl(data.url)
+      })
+      .catch(err=>{
+          console.log(err)
+      })
+  }
+
+  const uploadFields = ()=>{
+      // Email Regex : http://emailregex.com/
+      if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
+          M.toast({html: "Invalid Email", classes:"#c62828 red darken-3"})
+          return
+      }
+      // setfullName(firstName + " " + lastName)
+      fetch("/signup", {
+          method:"post",
+          headers:{
+              "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+              firstName,
+              lastName,
+              fullName : firstName + " " + lastName,
+              password,
+              email,
+              pic:url
+          })
+      }).then(res=>res.json())
+      .then(data=>{
+          //console.log(data)
+          if(data.error){
+              toast.error(data.error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+          }
+          else{
+              toast.success(data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+              history.push('/signin')
+          }
+      }).catch(err=>{
+          console.log(err)
+      })
+  }
+
+  const PostData = ()=>{
+
+      if(image){
+          uploadPic()
+      }
+      else{
+          uploadFields()
+      }
+
+      
+  }
+
   return (
     <>
       <IndexNavbar />
@@ -48,6 +155,7 @@ function SignupPage() {
           }}
         ></div>
         <div className="content">
+        
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
@@ -78,6 +186,8 @@ function SignupPage() {
                         type="text"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
+                        value={firstName}
+                        onChange={(e)=>setfirstName(e.target.value)}
                       ></Input>
                     </InputGroup>
 
@@ -97,6 +207,8 @@ function SignupPage() {
                         type="text"
                         onFocus={() => setSecondFocus(true)}
                         onBlur={() => setSecondFocus(false)}
+                        value={lastName}
+                        onChange={(e)=>setlastName(e.target.value)}
                       ></Input>
                     </InputGroup>
 
@@ -117,6 +229,8 @@ function SignupPage() {
                         type="text"
                         onFocus={() => setThirdFocus(true)}
                         onBlur={() => setThirdFocus(false)}
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
                       ></Input>
                     </InputGroup>
                     <InputGroup
@@ -135,6 +249,8 @@ function SignupPage() {
                         type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
                       ></Input>
                     </InputGroup>
                   </CardBody>
@@ -143,9 +259,8 @@ function SignupPage() {
                       block
                       className="btn-round"
                       color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
                       size="lg"
+                      onClick={()=>PostData()}
                     >
                       Sign Up
                     </Button>
@@ -153,7 +268,7 @@ function SignupPage() {
                       <h6>
                         <Link
                           className="link"
-                          to="/login-page"
+                          to="/signin"
                           
                         >
                           Already have an account?
