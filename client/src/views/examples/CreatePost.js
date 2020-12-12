@@ -464,8 +464,9 @@ function CreatePost() {
             >
                 <div className="modal-header">
                 <h4 className="modal-title" id="myLargeModalLabel">
-                    Large modal
+                    Tenouse Privacy Policy
                 </h4>
+                
                 <button
                     aria-label="Close"
                     className="close"
@@ -475,7 +476,25 @@ function CreatePost() {
                     <span aria-hidden={true}>×</span>
                 </button>
                 </div>
-                <div className="modal-body">...</div>
+                <div className="modal-body">
+                <h6>
+                    This policy explains what information we collect when you use Tenouse's 
+                    site, services, mobile applications, products and content. It also has information 
+                    about how we store, use, transfer, and delete that information. Our aim is to not 
+                    just comply with privacy law. It's to earn your trust.
+                </h6>
+                <h4>Information we collect & how we use it</h4>
+                <h6>Tenouse does make money from ads. So we do collect data to advertise to you. Also the tracking that we do 
+                is to make our product work as well as possible. </h6>
+                <h6>Inorder to give you the best possible experience using Tenouse, we collect information from your interactions with 
+                our network. Some of this information, you actively tell us (such as your email id, which we use to track your account 
+                or communicate with you). Other information, we collect based on actions you take while using Tenouse, such as what pages you access 
+                and your interactions with our product features (like highlights, follows, and applause). This information includes record 
+                of those interactions, your Internet Protocol address, information about your device (such as device or browser type), and referral information</h6>
+                
+
+
+                </div>
             </Modal>
             
             <div style={{ textAlign:"center", marginBottom:"60px" }}>

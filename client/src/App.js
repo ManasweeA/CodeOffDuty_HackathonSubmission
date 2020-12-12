@@ -33,10 +33,14 @@ import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import CreatePost from "views/examples/CreatePost";
 import RentProperty from "views/examples/RentProperty";
+import FollowingProperty from "views/examples/FollowingProperty";
+import HousePriceInfo from "views/examples/HousePriceInfo";
 import PropertyDetailedPage from "views/examples/PropertyDetailedPage";
 import RoommatePost from "views/examples/RoommatePost";
 import FindRoommates from "views/examples/FindRoommates";
 import Messages from "views/examples/Messages";
+import Premium from "views/examples/Premium";
+import Donate from "views/examples/Donate";
 
 import {reducer,initialState} from './reducers/userReducer'
 import UserProfilePage from 'views/examples/UserProfile';
@@ -91,6 +95,14 @@ const Routing = ()=>{
           render={(props) => <RentProperty {...props} />}
         />
         <Route
+          path="/following-property"
+          render={(props) => <FollowingProperty {...props} />}
+        />
+         <Route
+          path="/house-price-info"
+          render={(props) => <HousePriceInfo {...props} />}
+        />
+        <Route
           path="/property-detailed-page/:houseid"
           render={(props) => <PropertyDetailedPage {...props} />}
         />
@@ -105,6 +117,14 @@ const Routing = ()=>{
         <Route
           path="/messages"
           render={(props) => <Messages {...props} />}
+        />
+        <Route
+          path="/premium"
+          render={(props) => <Premium {...props} />}
+        />
+        <Route
+          path="/donate"
+          render={(props) => <Donate {...props} />}
         />
         <Route
           path="/profile/:userid"

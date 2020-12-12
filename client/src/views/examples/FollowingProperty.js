@@ -36,7 +36,7 @@ import DarkFooter from "components/Footers/DarkFooter.js";
 // sections for this page
 
 
-function RentProperty() {
+function FollowingProperty() {
   React.useEffect(() => {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -54,22 +54,7 @@ function RentProperty() {
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
         
-        fetch(`/housesuggestions`,{
-            headers:{
-                "Authorization":"Bearer "+localStorage.getItem("jwt")
-            }
-        })
-        .then(res=>res.json())
-        .then(result=>{
-            console.log(result)
-            let vals = []
-            for(let i =0; i<6; i++){
-                vals.push(result.posts[i])
-            }
-            setSuggestionData(vals)
-        })
-        
-        fetch('/allpost',{
+        fetch('/getsubpost',{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }
@@ -82,62 +67,6 @@ function RentProperty() {
         
 
     },[])
-
-    const likePost1 = (id)=>{
-        fetch('/like',{
-            method:"put",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem("jwt")
-            },
-            body:JSON.stringify({
-                postId:id
-            })
-        }).then(res=>res.json())
-        .then(result=>{
-            //console.log(result)
-            const newData = suggestiondata.map(item=>{
-                if(item._id==result._id)
-                {
-                    return result
-                }
-                else{
-                    return item
-                }
-            })
-            setSuggestionData(newData)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-
-    const unlikePost1 = (id)=>{
-        fetch('/unlike',{
-            method:"put",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem("jwt")
-            },
-            body:JSON.stringify({
-                postId:id
-            })
-        }).then(res=>res.json())
-        .then(result=>{
-            //console.log(result)
-            const newData = suggestiondata.map(item=>{
-                if(item._id==result._id)
-                {
-                    return result
-                }
-                else{
-                    return item
-                }
-            })
-            setSuggestionData(newData)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
 
     const likePost = (id)=>{
         fetch('/like',{
@@ -255,42 +184,7 @@ function RentProperty() {
 
         <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
         
-        <h1 style = {{ textAlign:"center", marginTop:"60px", marginBottom:"60px" }}>Rent Property</h1>
-
-        {
-            suggestiondata.map(item=>{
-                return(
-        
-        <Card style={{ width: "20rem", margin:"20px 20px" }}>
-        <Link to={"/property-detailed-page/"+item._id }><CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg></Link>
-            <CardBody>
-
-            {item.likes.includes(state._id)
-            ?  
-           <i style={{ color:"red", padding:"10px", fontSize:"20px" }} className="now-ui-icons ui-2_favourite-28" onClick={()=>{unlikePost1(item._id)}} >{item.likes.length}</i>
-           :
-           <i style={{ padding:"10px", fontSize:"20px" }} className="now-ui-icons ui-2_favourite-28" onClick={()=>{likePost1(item._id)}}>{item.likes.length}</i>
-            }
-
-           {item.postedBy._id == state._id
-            && 
-            <i style={{ padding:"10px", fontSize:"20px" }} className="now-ui-icons files_box" onClick={()=>deletePost(item._id)}></i>
-           }
-
-            <CardTitle tag="h4">{item.question6 + " " + item.question7}</CardTitle>
-            {item.house_struct + ", " + item.house_type}
-            
-            <CardText>
-                {"Rs " + item.question3}
-                <h6> - <Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id :"/profile/"}>{item.postedBy.fullName}</Link></h6>
-            </CardText>
-            
-            </CardBody>
-        </Card>
-
-        )
-            })
-        }
+        <h1 style = {{ textAlign:"center", marginTop:"60px", marginBottom:"60px" }}>Following Property</h1>
 
         {
             data.map(item=>{
@@ -354,4 +248,4 @@ function RentProperty() {
   );
 }
 
-export default RentProperty;
+export default FollowingProperty;

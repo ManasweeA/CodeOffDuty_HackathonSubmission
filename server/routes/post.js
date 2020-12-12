@@ -312,5 +312,54 @@ router.get('/house/:id',requireLogin,(req,res)=>{
 })
 
 
+router.post('/predicthouseprice',requireLogin, async(req,res)=>{
+    let data = req.body
+    let cities = {
+        "Pune":1,
+        "Mumbai":2,
+        "Bangalore":3,
+        "Hyderabad":4
+    }
+
+    let house_struct = {
+        "Bungalow":1,
+        "Building":2,
+        "Row_House":3
+    }
+
+    let house_type = {
+        "Furnished":1,
+        'Unfurnished':2
+    }
+
+    
+    let city_selected = cities[data.City]
+    let quarter_selected = Math.floor(data.Quarter)
+    let house_struct_selected = house_struct[data.HouseStructure]
+    let house_type_selected = house_type[data.HouseType]
+    let bhk_selected = Math.floor(data.BHK)
+    let main_data = [city_selected, quarter_selected, house_struct_selected, house_type_selected, bhk_selected]
+
+    console.log(JSON.stringify(main_data))
+
+    await fetch('http://127.0.0.1:8000/predict_house_price', {
+        method: 'post',
+        body:    JSON.stringify({
+            "main_data":main_data
+        }),
+        headers: { 'Content-Type': 'application/json' },
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            
+            res.json({result:parseInt(json.predictedValue)})
+            
+        });
+
+})
+
+
+
 
 module.exports = router

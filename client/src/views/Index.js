@@ -73,14 +73,20 @@ function Index() {
     }).then(res=>res.json())
     .then(result=>{
         console.log(result)
-        let vals = []
-        if(result.posts){
-            for(let i =0; i<6; i++){
-                vals.push(result.posts[i])
+        try{
+            let vals = []
+            if(result.posts.length>0){
+                for(let i =0; i<6; i++){
+                    vals.push(result.posts[i])
+                }
+                setData(vals)
             }
         }
+        catch(err){
+            console.log("Error found : ", err)
+        }
         
-        setData(vals)
+
     })
 
     fetch('/allroommates',{
@@ -90,13 +96,20 @@ function Index() {
     }).then(res=>res.json())
     .then(result=>{
         console.log(result)
-        let vals = []
-        if(result.posts){
-            for(let i =0; i<6; i++){
-                vals.push(result.posts[i])
+        try{
+            let vals = []
+            if(result.posts.length>0){
+                for(let i =0; i<6; i++){
+                    vals.push(result.posts[i])
+                }
+                setData1(vals)
             }
+
         }
-        setData1(vals)
+        catch(err){
+            console.log("Error found : ", err)
+        }
+        
     })
 
   },[])
@@ -216,7 +229,7 @@ function Index() {
         }).then(res=>res.json())
         .then(result=>{
             //console.log(result)
-            const newData = data.map(item=>{
+            const newData = data1.map(item=>{
                 if(item._id==result._id)
                 {
                     return result
@@ -225,7 +238,7 @@ function Index() {
                     return item
                 }
             })
-            setData(newData)
+            setData1(newData)
         }).catch(err=>{
             console.log(err)
         })
@@ -244,7 +257,7 @@ function Index() {
         }).then(res=>res.json())
         .then(result=>{
             //console.log(result)
-            const newData = data.map(item=>{
+            const newData = data1.map(item=>{
                 if(item._id==result._id)
                 {
                     return result
@@ -253,7 +266,7 @@ function Index() {
                     return item
                 }
             })
-            setData(newData)
+            setData1(newData)
         }).catch(err=>{
             console.log(err)
         })
@@ -351,7 +364,7 @@ function Index() {
         }
 
         {
-            data?
+            data1?
             <>
         <Container>
         <Row>
@@ -384,7 +397,6 @@ function Index() {
             ?  
             <Button
                 color="danger"
-                href="#pablo"
                 onClick={()=>{unconnectRoommate(item._id)}}
             >
                 Unconnect
@@ -392,7 +404,6 @@ function Index() {
             : item.postedBy._id != state._id && 
             <Button
                 color="info"
-                href="#pablo"
                 onClick={()=>{connectRoommate(item._id)}}
             >
                 Connect

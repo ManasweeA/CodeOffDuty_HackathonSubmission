@@ -21,16 +21,14 @@ function DarkFooter() {
             </li> */}
             <li>
               <a
-                href="http://presentation.creative-tim.com?ref=nukr-dark-footer"
-                target="_blank"
+                href="#"
               >
                 About Us
               </a>
             </li>
             <li>
               <a
-                href="http://blog.creative-tim.com?ref=nukr-dark-footer"
-                target="_blank"
+                href="#"
               >
                 Blog
               </a>
@@ -42,7 +40,7 @@ function DarkFooter() {
           <Link
             to='/'
           >
-            Tenouse
+            Tenouse Team
           </Link>
           {/* . Coded by{" "} }
           <a

@@ -1,5 +1,6 @@
 import React,{useEffect, useState, useContext} from 'react';
 import {UserContext} from '../../App';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -20,7 +21,7 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
 function ProfilePage() {
-  const [pills, setPills] = React.useState("2");
+  const [pills, setPills] = React.useState("1");
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -143,10 +144,7 @@ function ProfilePage() {
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">
-              An artist of considerable range, Ryan — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure. An artist of considerable range.
+            Our life contains a thousand springs, and dies if one be gone. Strange! that a harp of thousand strings should keep in tune so long.
             </h5>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
@@ -170,7 +168,7 @@ function ProfilePage() {
                         <i className="now-ui-icons design_image"></i>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                       <NavLink
                         className={pills === "2" ? "active" : ""}
                         href="#pablo"
@@ -193,7 +191,7 @@ function ProfilePage() {
                       >
                         <i className="now-ui-icons sport_user-run"></i>
                       </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                   </Nav>
                 </div>
               </Col>
@@ -205,12 +203,14 @@ function ProfilePage() {
                     {
                     mypics.map(item=>{
                     return(
+                      <Link to={"/property-detailed-page/"+item._id }>
                         <img
                           key={item._id}
                           className="img-raised"
                           src={item.pic1} 
                           alt={item.question6}
                         ></img>
+                        </Link>
                          )
                         })
                     }

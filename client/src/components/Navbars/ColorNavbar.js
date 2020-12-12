@@ -88,20 +88,14 @@ function ColorNavbar() {
             navbar
           >
             <Nav navbar>
+            <Link to="/">
               <NavItem>
-                <NavLink
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
-                  }}
-                >
-                  <i className="now-ui-icons arrows-1_cloud-download-93"></i>
-                  <p>About</p>
-                </NavLink>
-              </NavItem>
+              <NavLink>
+                <i className="now-ui-icons arrows-1_cloud-download-93"></i>
+                <p>About</p>
+              </NavLink>
+            </NavItem>
+            </Link>
               
               <UncontrolledDropdown nav>
                 <DropdownToggle
@@ -125,6 +119,18 @@ function ColorNavbar() {
                     <i className="now-ui-icons objects_key-25"></i>
                     Rent Property
                   </DropdownItem>
+                  <DropdownItem
+                  to="/following-property" tag={Link}
+                  >
+                  <i className="now-ui-icons sport_user-run"></i>
+                  Following Property
+                </DropdownItem>
+                <DropdownItem
+                  to="/house-price-info" tag={Link}
+                  >
+                  <i className="now-ui-icons travel_info"></i>
+                  House Price Info
+                </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
 
@@ -164,6 +170,26 @@ function ColorNavbar() {
               </NavItem>
 
               <NavItem>
+              <Link to="/premium">
+                <NavLink
+                >
+                  <i className="now-ui-icons education_agenda-bookmark"></i>
+                  <p>Premium</p>
+                </NavLink>
+                </Link>
+              </NavItem>
+
+            <NavItem>
+            <Link to="/donate">
+              <NavLink
+              >
+                <i className="now-ui-icons business_money-coins"></i>
+                <p>Donate</p>
+              </NavLink>
+              </Link>
+            </NavItem>
+
+              <NavItem>
               <Link to="/profile/">
                 <NavLink
       
@@ -172,23 +198,6 @@ function ColorNavbar() {
                   <p>Profile</p>
                 </NavLink>
                 </Link>
-              </NavItem>
-
-              <NavItem>
-              <Link to="/login-page">
-                <Button
-                  className="nav-link btn-neutral btn-round"
-                  color="info"
-                  id="upgrade-to-pro"
-                  
-                >
-                  <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                  <p>SignUp/SignIn</p>
-                </Button>
-                </Link>
-                <UncontrolledTooltip target="#upgrade-to-pro">
-                  SignIn to experience the most amazing features
-                </UncontrolledTooltip>
               </NavItem>
               
               

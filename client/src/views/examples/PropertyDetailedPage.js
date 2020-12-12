@@ -90,7 +90,8 @@ function PropertyDetailedPage() {
 
 
   const makeComment = (text,postId)=>{
-    fetch('/comment',{
+    if(text){
+      fetch('/comment',{
         method:"put",
         headers:{
             "Content-Type":"application/json",
@@ -100,13 +101,15 @@ function PropertyDetailedPage() {
             postId,
             text
         })
-    }).then(res=>res.json())
-    .then(result=>{
-        console.log(result)
-        setProfile(result)
-    }).catch(err=>{
-        console.log(err)
-    })
+      }).then(res=>res.json())
+      .then(result=>{
+          console.log(result)
+          setProfile(result)
+      }).catch(err=>{
+          console.log(err)
+      })
+    }
+    
   }
 
   console.log(userProfile)

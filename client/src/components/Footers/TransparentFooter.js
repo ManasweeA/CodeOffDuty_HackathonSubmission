@@ -21,16 +21,14 @@ function TransparentFooter() {
             </li> */}
             <li>
               <a
-                href="http://presentation.creative-tim.com?ref=nukr-transparent-footer"
-                target="_blank"
+                href="#"
               >
                 About Us
               </a>
             </li>
             <li>
               <a
-                href="http://blog.creative-tim.com?ref=nukr-transparent-footer"
-                target="_blank"
+                href="#"
               >
                 Blog
               </a>
@@ -40,7 +38,7 @@ function TransparentFooter() {
         <div className="copyright" id="copyright">
           © {new Date().getFullYear()}, Designed and Developed by{" "}
           <Link to='/'>
-            Tenouse
+            Tenouse Team
           </Link>
           {/* . Coded by{" "}
           <a

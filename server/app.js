@@ -39,6 +39,7 @@ app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
 app.use(require('./routes/user'))
 app.use(require('./routes/roommate'))
+app.use(require('./routes/adminDashboard'))
 
 
 app.listen(PORT,()=>{

@@ -48,20 +48,14 @@ function IndexNavbar() {
   const renderList = ()=>{
     if (state){
       return [
+        <Link to="/">
         <NavItem>
-        <NavLink
-          href="#pablo"
-          onClick={(e) => {
-            e.preventDefault();
-            document
-              .getElementById("download-section")
-              .scrollIntoView();
-          }}
-        >
+        <NavLink>
           <i className="now-ui-icons arrows-1_cloud-download-93"></i>
           <p>About</p>
         </NavLink>
-      </NavItem>,
+      </NavItem>
+      </Link>,
       
       <UncontrolledDropdown nav>
         <DropdownToggle
@@ -84,6 +78,18 @@ function IndexNavbar() {
           >
             <i className="now-ui-icons objects_key-25"></i>
             Rent Property
+          </DropdownItem>
+          <DropdownItem
+            to="/following-property" tag={Link}
+          >
+            <i className="now-ui-icons sport_user-run"></i>
+            Following Property
+          </DropdownItem>
+          <DropdownItem
+            to="/house-price-info" tag={Link}
+          >
+            <i className="now-ui-icons travel_info"></i>
+            House Price Info
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>,
@@ -122,6 +128,26 @@ function IndexNavbar() {
         </NavLink>
         </Link>
       </NavItem>,
+
+      <NavItem>
+      <Link to="/premium">
+        <NavLink
+        >
+          <i className="now-ui-icons education_agenda-bookmark"></i>
+          <p>Premium</p>
+        </NavLink>
+        </Link>
+      </NavItem>,
+
+    <NavItem>
+    <Link to="/donate">
+      <NavLink
+      >
+        <i className="now-ui-icons business_money-coins"></i>
+        <p>Donate</p>
+      </NavLink>
+      </Link>
+    </NavItem>,
 
       <NavItem>
       <Link to="/profile/">
