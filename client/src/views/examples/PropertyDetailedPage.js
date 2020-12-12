@@ -225,7 +225,16 @@ function PropertyDetailedPage() {
         </Container>
 
         :
-      <h2>loading ...</h2>
+        <Container>
+        
+        <Row>
+
+        <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
+        <i style={{ marginLeft:"auto", marginRight:"auto", marginTop:"200px", fontSize:"200px" }} className="now-ui-icons loader_refresh"></i>
+        <h2 style={{  marginBottom:"200px" }}>Loading...</h2>
+        </Col>
+        </Row>
+        </Container>
     }
         </>
          
