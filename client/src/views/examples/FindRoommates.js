@@ -51,7 +51,7 @@ function FindRoommates() {
     };
   });
   
-  const [data,setData] = useState([])
+  const [data,setData] = useState(undefined)
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
         fetch('/allroommates',{
@@ -144,7 +144,8 @@ function FindRoommates() {
         <PostPropertyHeader />
         <div className="main">
         <>
-
+        {
+            data?
         <Container>
         <Row>
         <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
@@ -207,6 +208,18 @@ function FindRoommates() {
         </Col>
         </Row>
         </Container>
+        :
+        <Container>
+        
+        <Row>
+
+        <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
+        <i style={{ marginLeft:"auto", marginRight:"auto", marginTop:"200px", fontSize:"200px" }} className="now-ui-icons loader_refresh"></i>
+        <h2 style={{  marginBottom:"200px" }}>Loading...</h2>
+        </Col>
+        </Row>
+        </Container>
+        }
         </>
          
         </div>
