@@ -74,7 +74,7 @@ function Donate() {
 
         <Button className="btn-round"  style={{ color:"white", background:"red" }} >
         <i className="fa fa-heart" />{' '}
-            Donate
+            <b>Donate</b>
         </Button>
             
         </Col>
