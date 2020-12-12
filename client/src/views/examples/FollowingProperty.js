@@ -208,6 +208,16 @@ function FollowingProperty() {
 
             <CardTitle tag="h4">{item.question6 + " " + item.question7}</CardTitle>
             {item.house_struct + ", " + item.house_type}
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons health_ambulance" style={{ fontSize:"25px" }}></i>{" "}5 km</Col>
+            <Col><i className="now-ui-icons business_bank" style={{ fontSize:"20px" }}></i>{" "}10 km</Col>
+            </Row>
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons shopping_cart-simple" style={{ fontSize:"25px" }}></i>{" "}15 km</Col>
+            <Col><i className="now-ui-icons objects_spaceship" style={{ fontSize:"20px" }}></i>{" "}12 km</Col>
+            </Row>
             
             <CardText>
                 {"Rs " + item.question3}

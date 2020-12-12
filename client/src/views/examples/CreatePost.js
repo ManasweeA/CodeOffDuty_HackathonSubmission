@@ -446,7 +446,7 @@ function CreatePost() {
             <div style={{ textAlign:"left", paddingLeft:"25px" }}>
                 <Label check>
                 <Input type="checkbox" onChange={(e)=>setCheckbox(e.target.value)} />
-                I accept the  
+                I accept the {" "}
                 <a style={{ color:"red" }}
                     onClick={() => setModalLarge(true)}
                 >

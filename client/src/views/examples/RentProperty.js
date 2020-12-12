@@ -3,7 +3,6 @@ import {UserContext} from '../../App';
 import {Link} from 'react-router-dom';
 
 import {
-    Button,
     Card,
     CardHeader,
     CardBody,
@@ -23,6 +22,12 @@ import {
     Row,
     Col,
     Modal,
+    Button,
+    ButtonGroup,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    UncontrolledDropdown
     
   } from "reactstrap";
 
@@ -250,13 +255,128 @@ function RentProperty() {
         <>
 
         <Container>
+
+        <h1 style = {{ textAlign:"center", marginTop:"200px", marginBottom:"60px" }}>Rent Property</h1>
+
+
+        <Row style = {{ marginTop: "60px", textAlign:"center" }}>
+        
+            <Col>
+            <UncontrolledDropdown className="btn-group">
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="info"
+          data-toggle="dropdown"
+          type="button"
+        >
+          Distance
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            5 - 15 kms
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            15 - 60 kms
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            60 - 120
+          </DropdownItem>
+
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            120 - 250
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+            </Col>
+
+            <Col>
+            <UncontrolledDropdown className="btn-group">
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="info"
+          data-toggle="dropdown"
+          type="button"
+        >
+          Location
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Pune
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Mumbai
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Bangalore
+          </DropdownItem>
+          
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Hyderabad
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+            </Col>
+
+            <Col>
+            <UncontrolledDropdown className="btn-group">
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="info"
+          data-toggle="dropdown"
+          type="button"
+        >
+          House Structure
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Bungalow
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Building
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Row House
+          </DropdownItem>
+          <DropdownItem />
+        </DropdownMenu>
+      </UncontrolledDropdown>
+            </Col>
+
+            <Col>
+            <UncontrolledDropdown className="btn-group">
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="info"
+          data-toggle="dropdown"
+          type="button"
+        >
+          House Type
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Furnished
+          </DropdownItem>
+          <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
+            Unfurnished
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+            </Col>
+        </Row>
         
         <Row>
 
         <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
         
-        <h1 style = {{ textAlign:"center", marginTop:"60px", marginBottom:"60px" }}>Rent Property</h1>
-
+       
         {
             suggestiondata.map(item=>{
                 return(
@@ -279,6 +399,16 @@ function RentProperty() {
 
             <CardTitle tag="h4">{item.question6 + " " + item.question7}</CardTitle>
             {item.house_struct + ", " + item.house_type}
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons health_ambulance" style={{ fontSize:"25px" }}></i>{" "}5 km</Col>
+            <Col><i className="now-ui-icons business_bank" style={{ fontSize:"20px" }}></i>{" "}10 km</Col>
+            </Row>
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons shopping_cart-simple" style={{ fontSize:"25px" }}></i>{" "}15 km</Col>
+            <Col><i className="now-ui-icons objects_spaceship" style={{ fontSize:"20px" }}></i>{" "}12 km</Col>
+            </Row>
             
             <CardText>
                 {"Rs " + item.question3}
@@ -314,6 +444,18 @@ function RentProperty() {
 
             <CardTitle tag="h4">{item.question6 + " " + item.question7}</CardTitle>
             {item.house_struct + ", " + item.house_type}
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons health_ambulance" style={{ fontSize:"25px" }}></i>{" "}5 km</Col>
+            <Col><i className="now-ui-icons business_bank" style={{ fontSize:"20px" }}></i>{" "}10 km</Col>
+            </Row>
+
+            <Row style={{ marginTop:"10px", marginBottom:"10px" }}>
+            <Col><i className="now-ui-icons shopping_cart-simple" style={{ fontSize:"25px" }}></i>{" "}15 km</Col>
+            <Col><i className="now-ui-icons objects_spaceship" style={{ fontSize:"20px" }}></i>{" "}12 km</Col>
+            </Row>
+
+            
             
             <CardText>
                 {"Rs " + item.question3}
