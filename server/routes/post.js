@@ -184,6 +184,13 @@ router.post('/verifiedpost', requireLogin, async(req,res)=>{
     else{
         house_type = "Semi-Furnished House"
     }
+
+    let currentDate = new Date()
+
+    if(req.body.date){
+        currentDate = new Date(req.body.date)
+    }
+
     const post = new Post({
         pic1,
         pic2,
@@ -199,7 +206,8 @@ router.post('/verifiedpost', requireLogin, async(req,res)=>{
         question7,
         question8,
         question9,
-        postedBy:req.user
+        postedBy:req.user,
+        datePosted:currentDate
     })
     post.save().then(result=>{
         res.json({post:result})

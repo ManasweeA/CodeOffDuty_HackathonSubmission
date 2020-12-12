@@ -67,6 +67,10 @@ const roommateSchema = new mongoose.Schema({
     postedBy:{
         type:ObjectId,
         ref:"User"
+    },
+    datePosted:{
+        type:Date,
+        required:true
     }
 })
 
