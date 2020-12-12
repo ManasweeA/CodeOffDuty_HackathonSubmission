@@ -311,4 +311,6 @@ router.get('/house/:id',requireLogin,(req,res)=>{
     })
 })
 
+
+
 module.exports = router

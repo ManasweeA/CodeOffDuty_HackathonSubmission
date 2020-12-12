@@ -60,15 +60,32 @@ function PropertyDetailedPage() {
   
   //console.log(userid)
   useEffect(()=>{
-      fetch(`/house/${houseid}`,{
-          headers:{
-              "Authorization":"Bearer "+localStorage.getItem("jwt")
-          }
-      }).then(res=>res.json())
-      .then(result=>{
-          console.log(result)
-          setProfile(result)
+    fetch('/houseviewed',{
+      method:"put",
+      headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Bearer "+localStorage.getItem("jwt")
+      },
+      body:JSON.stringify({
+          viewId:houseid
       })
+    }).then(res=>res.json())
+    .then(result=>{
+        console.log(result)
+    }).catch(err=>{
+        console.log(err)
+    })
+
+
+    fetch(`/house/${houseid}`,{
+        headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+        }
+    }).then(res=>res.json())
+    .then(result=>{
+        console.log(result)
+        setProfile(result)
+    })
   },[])
 
 

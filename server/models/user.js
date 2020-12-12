@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     followers:[{type:ObjectId,ref:"User"}],
     following:[{type:ObjectId,ref:"User"}],
+    houseviewed:[{type:ObjectId, ref:"Post"}],
     dateCreated:{
         type:Date,
         required:true

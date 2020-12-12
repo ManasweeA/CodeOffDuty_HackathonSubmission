@@ -75,4 +75,22 @@ router.put('/updatepic', requireLogin, (req,res)=>{
     })
 })
 
+
+router.put('/houseviewed',requireLogin,(req,res)=>{
+    User.findByIdAndUpdate(req.user._id,{
+        $push:{houseviewed:req.body.viewId}
+    },{
+        new:true
+    },(err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            return res.status(200).json({result})
+        }
+    }
+    )
+})
+
+
 module.exports = router
