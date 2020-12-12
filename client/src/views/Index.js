@@ -74,9 +74,12 @@ function Index() {
     .then(result=>{
         console.log(result)
         let vals = []
-        for(let i =0; i<6; i++){
-            vals.push(result.posts[i])
+        if(result.posts){
+            for(let i =0; i<6; i++){
+                vals.push(result.posts[i])
+            }
         }
+        
         setData(vals)
     })
 
@@ -88,8 +91,10 @@ function Index() {
     .then(result=>{
         console.log(result)
         let vals = []
-        for(let i =0; i<6; i++){
-            vals.push(result.posts[i])
+        if(result.posts){
+            for(let i =0; i<6; i++){
+                vals.push(result.posts[i])
+            }
         }
         setData1(vals)
     })
