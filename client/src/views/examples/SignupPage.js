@@ -178,8 +178,8 @@ function SignupPage() {
                     <div>
                       <img
                         alt="..."
-                        src={require("assets/img/tenrox_logo_light.png")}
-                        style={{ height:"70px", width:"120px", marginBottom:"50px" }}
+                        src={require("assets/img/TenouseLogo.png")}
+                        style={{ height:"120px", width:"120px", marginBottom:"50px" }}
                       ></img>
                     </div>
                   </CardHeader>
@@ -316,6 +316,7 @@ function SignupPage() {
                       className="btn-round"
                       color="info"
                       size="lg"
+                      style={{ marginBottom:"60px" }}
                       onClick={()=>PostData()}
                     >
                       Sign Up
