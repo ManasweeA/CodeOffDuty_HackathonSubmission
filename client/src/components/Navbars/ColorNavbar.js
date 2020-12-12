@@ -53,18 +53,18 @@ function ColorNavbar() {
       <Navbar className="bg-info" expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
+          <Link to = '/'>
             <NavbarBrand
-              href="#pablo"
-              target="_blank"
               id="navbar-brand"
             >
             <img
                   alt="..."
-                  src={require("assets/img/tenrox_logo_light.png")}
-                  style = {{ height: "50px"}}
+                  src={require("assets/img/TenouseLogo.png")}
+                  style = {{ height: "80px"}}
                 ></img>
               
             </NavbarBrand>
+            </Link>
             <UncontrolledTooltip target="#navbar-brand">
               AI based agile intimation for Tenants and other folks
             </UncontrolledTooltip>
@@ -164,18 +164,14 @@ function ColorNavbar() {
               </NavItem>
 
               <NavItem>
+              <Link to="/profile/">
                 <NavLink
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
-                  }}
+      
                 >
                   <i className="now-ui-icons users_single-02"></i>
                   <p>Profile</p>
                 </NavLink>
+                </Link>
               </NavItem>
 
               <NavItem>

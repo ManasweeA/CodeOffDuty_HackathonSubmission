@@ -19,12 +19,19 @@ router.get('/protected',requireLogin,(req,res)=>{
 
 router.post('/signup', (req,res)=>{
     //console.log(req.body)
-    const {firstName, lastName, fullName, email, password, pic} = req.body
+    const {firstName, lastName, fullName, email, city, gender, password, pic} = req.body
     console.log("Called")
     console.log(req.body)
-    if (!email || !password || !firstName || !lastName || !fullName){
+    if (!email || !password || !firstName || !lastName || !fullName || !city || !gender){
         return res.status(422).json({error:"Please enter values in all the fields"})
     }
+    
+    let currentDate = new Date()
+
+    if(req.body.date){
+        currentDate = new Date(req.body.date)
+    }
+    // console.log(req.body.date)
     //res.json({message:"Successfully Posted"})
     User.findOne({email:email})
     .then((savedUser)=>{
@@ -39,7 +46,10 @@ router.post('/signup', (req,res)=>{
                 firstName,
                 lastName,
                 fullName,
-                pic
+                city,
+                gender,
+                pic,
+                dateCreated:currentDate
             })
     
             user.save()

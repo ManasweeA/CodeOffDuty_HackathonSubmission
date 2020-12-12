@@ -91,7 +91,7 @@ const Routing = ()=>{
           render={(props) => <RentProperty {...props} />}
         />
         <Route
-          path="/property-detailed-page"
+          path="/property-detailed-page/:houseid"
           render={(props) => <PropertyDetailedPage {...props} />}
         />
         <Route

@@ -184,6 +184,13 @@ router.post('/verifiedpost', requireLogin, async(req,res)=>{
     else{
         house_type = "Semi-Furnished House"
     }
+
+    let currentDate = new Date()
+
+    if(req.body.date){
+        currentDate = new Date(req.body.date)
+    }
+
     const post = new Post({
         pic1,
         pic2,
@@ -199,7 +206,8 @@ router.post('/verifiedpost', requireLogin, async(req,res)=>{
         question7,
         question8,
         question9,
-        postedBy:req.user
+        postedBy:req.user,
+        datePosted:currentDate
     })
     post.save().then(result=>{
         res.json({post:result})
@@ -265,13 +273,14 @@ router.put('/comment',requireLogin,(req,res)=>{
             return res.status(422).json({error:err})
         }
         else{
-            res.json(result)
+            res.json({house:result})
         }
     })
 })
 
 router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
+    .populate("comments.postedBy","_id fullName")
     .populate("postedBy","_id")
     .exec((err,post)=>{
         if(err || !post){
@@ -287,5 +296,21 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
         }
     })
 })
+
+
+router.get('/house/:id',requireLogin,(req,res)=>{
+    Post.findOne({_id:req.params.id})
+    .populate("comments.postedBy","_id fullName")
+    .populate("postedBy","_id fullName")
+    .select("-password")
+    .then(house=>{
+        res.json({house})
+        })
+    .catch(err=>{
+        return res.status(404).json({error:"Property not found"})
+    })
+})
+
+
 
 module.exports = router

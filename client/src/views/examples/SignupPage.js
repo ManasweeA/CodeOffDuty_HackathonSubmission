@@ -16,6 +16,8 @@ import {
   Col,
   Alert,
   UncontrolledAlert,
+  FormGroup,
+  Label
 } from "reactstrap";
 
 // Toast
@@ -34,11 +36,12 @@ function SignupPage() {
   const [secondFocus, setSecondFocus] = React.useState(false);
   const [thirdFocus, setThirdFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+  const [fourthFocus, setFourthFocus] = React.useState(false);
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
       document.body.classList.remove("login-page");
@@ -50,6 +53,8 @@ function SignupPage() {
   const [firstName,setfirstName] = useState("")
   const [lastName,setlastName] = useState("")
   const [fullName,setfullName] = useState("")
+  const [city,setCity] = useState("")
+  const [gender,setGender] = useState("")
   const [password,setPassword] = useState("")
   const [email,setEmail] = useState("")
   const [image,setImage] = useState("")
@@ -64,9 +69,9 @@ function SignupPage() {
   const uploadPic = ()=>{
       const data = new FormData()
       data.append("file", image)
-      data.append("upload_preset", "tenrox")
-      data.append("cloud_name", "dduj3fext")
-      fetch("https://api.cloudinary.com/v1_1/dduj3fext/image/upload",{
+      data.append("upload_preset", "tenouse")
+      data.append("cloud_name", "safcloud")
+      fetch("https://api.cloudinary.com/v1_1/safcloud/image/upload",{
           method:"post",
           body:data
       })
@@ -104,6 +109,8 @@ function SignupPage() {
               firstName,
               lastName,
               fullName : firstName + " " + lastName,
+              city,
+              gender,
               password,
               email,
               pic:url
@@ -171,8 +178,8 @@ function SignupPage() {
                     <div>
                       <img
                         alt="..."
-                        src={require("assets/img/tenrox_logo_light.png")}
-                        style={{ height:"70px", width:"120px", marginBottom:"50px" }}
+                        src={require("assets/img/TenouseLogo.png")}
+                        style={{ height:"120px", width:"120px", marginBottom:"50px" }}
                       ></img>
                     </div>
                   </CardHeader>
@@ -233,13 +240,51 @@ function SignupPage() {
                       </InputGroupAddon>
                       <Input
                         placeholder="Email..."
-                        type="text"
+                        type="email"
                         onFocus={() => setThirdFocus(true)}
                         onBlur={() => setThirdFocus(false)}
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}
                       ></Input>
                     </InputGroup>
+
+                    <InputGroup
+                      className={
+                        "no-border input-lg" +
+                        (thirdFocus ? " input-group-focus" : "")
+                      }
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons location_world"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="City..."
+                        type="text"
+                        onFocus={() => setFourthFocus(true)}
+                        onBlur={() => setFourthFocus(false)}
+                        value={city}
+                        onChange={(e)=>setCity(e.target.value)}
+                      ></Input>
+                    </InputGroup>
+
+
+                    <FormGroup tag="fieldset" style={{ textAlign:"left", marginBottom:"60px" }}>
+                      <legend style={{ fontSize:"15px" }}>Gender</legend>
+                      <FormGroup check>
+                      <Label check>
+                          <Input type="radio" name="radio10" value="Male" onChange={(e)=>setGender(e.target.value)} />{'Male'}
+                      </Label>
+                      </FormGroup>
+                      <FormGroup check>
+                      <Label check>
+                          <Input type="radio" name="radio10" value="Female" onChange={(e)=>setGender(e.target.value)} />{'Female'}
+                      </Label>
+                      </FormGroup>
+                  
+                  </FormGroup>
+
                     <InputGroup
                       className={
                         "no-border input-lg" +
@@ -260,6 +305,10 @@ function SignupPage() {
                         onChange={(e)=>setPassword(e.target.value)}
                       ></Input>
                     </InputGroup>
+
+                    <Label for="exampleFile">Upload your Pic</Label>
+                    <Input style={{ textAlign:"center" }} type="file" name="file" id="exampleFile" onChange={(e)=>setImage(e.target.files[0])} />
+
                   </CardBody>
                   <CardFooter className="text-center">
                     <Button
@@ -267,6 +316,7 @@ function SignupPage() {
                       className="btn-round"
                       color="info"
                       size="lg"
+                      style={{ marginBottom:"60px" }}
                       onClick={()=>PostData()}
                     >
                       Sign Up

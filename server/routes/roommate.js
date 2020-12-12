@@ -61,6 +61,11 @@ router.post('/createroommatepost', requireLogin, async(req,res)=>{
     // Remove the password while storing the postedBy user
     req.user.password = undefined
 
+    let currentDate = new Date()
+
+    if(req.body.date){
+        currentDate = new Date(req.body.date)
+    }
     
     const post = new Roommate({
         pic1,
@@ -78,7 +83,8 @@ router.post('/createroommatepost', requireLogin, async(req,res)=>{
         question12,
         question13,
         question14,
-        postedBy:req.user
+        postedBy:req.user,
+        datePosted:currentDate
     })
     post.save().then(result=>{
         res.json({post:result})

@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import { Container } from "reactstrap";
@@ -10,14 +11,14 @@ function DarkFooter() {
       <Container>
         <nav>
           <ul>
-            <li>
+            {/* <li>
               <a
                 href="https://www.creative-tim.com?ref=nukr-dark-footer"
                 target="_blank"
               >
                 Creative Tim
               </a>
-            </li>
+            </li> */}
             <li>
               <a
                 href="http://presentation.creative-tim.com?ref=nukr-dark-footer"
@@ -37,20 +38,19 @@ function DarkFooter() {
           </ul>
         </nav>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Designed by{" "}
-          <a
-            href="https://www.invisionapp.com?ref=nukr-dark-footer"
-            target="_blank"
+          © {new Date().getFullYear()}, Designed and Developed By{" "}
+          <Link
+            to='/'
           >
-            Invision
-          </a>
-          . Coded by{" "}
+            Tenouse
+          </Link>
+          {/* . Coded by{" "} }
           <a
             href="https://www.creative-tim.com?ref=nukr-dark-footer"
             target="_blank"
           >
             Creative Tim
-          </a>
+          </a> */}
           .
         </div>
       </Container>

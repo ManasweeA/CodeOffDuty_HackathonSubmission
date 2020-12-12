@@ -377,7 +377,7 @@ function RoommatePost() {
                 </FormGroup>
                 <FormGroup check>
                 <Label check>
-                    <Input type="radio" name="radio7" value="Not married" onChange={(e)=>setQuestion7(e.target.value)} />{'Not married'}
+                    <Input type="radio" name="radio7" value="Not Married" onChange={(e)=>setQuestion7(e.target.value)} />{'Not Married'}
                 </Label>
                 </FormGroup>
             

@@ -49,9 +49,26 @@ function RentProperty() {
     };
   });
 
-    const [data,setData] = useState([])
+    const [suggestiondata,setSuggestionData] = useState(undefined)
+    const [data,setData] = useState(undefined)
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
+        
+        fetch(`/housesuggestions`,{
+            headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            let vals = []
+            for(let i =0; i<6; i++){
+                vals.push(result.posts[i])
+            }
+            setSuggestionData(vals)
+        })
+        
         fetch('/allpost',{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
@@ -61,6 +78,9 @@ function RentProperty() {
             console.log(result)
             setData(result.posts)
         })
+
+        
+
     },[])
 
     const likePost = (id)=>{
@@ -170,19 +190,23 @@ function RentProperty() {
       <div className="wrapper">
         <PostPropertyHeader />
         <div className="main">
+        {data?
         <>
 
         <Container>
+        
         <Row>
+
         <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
+        
         <h1 style = {{ textAlign:"center", marginTop:"60px", marginBottom:"60px" }}>Rent Property</h1>
 
         {
-            data.map(item=>{
+            suggestiondata.map(item=>{
                 return(
         
         <Card style={{ width: "20rem", margin:"20px 20px" }}>
-            <CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg>
+        <Link to={"/property-detailed-page/"+item._id }><CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg></Link>
             <CardBody>
 
             {item.likes.includes(state._id)
@@ -211,11 +235,61 @@ function RentProperty() {
         )
             })
         }
+
+        {
+            data.map(item=>{
+                return(
+        
+        <Card style={{ width: "20rem", margin:"20px 20px" }}>
+        <Link to={"/property-detailed-page/"+item._id }><CardImg alt="..." src={item.pic1} top style={{ height:"200px", width:"350px" }}></CardImg></Link>
+            <CardBody>
+
+            {item.likes.includes(state._id)
+            ?  
+           <i style={{ color:"red", padding:"10px", fontSize:"20px" }} className="now-ui-icons ui-2_favourite-28" onClick={()=>{unlikePost(item._id)}} >{item.likes.length}</i>
+           :
+           <i style={{ padding:"10px", fontSize:"20px" }} className="now-ui-icons ui-2_favourite-28" onClick={()=>{likePost(item._id)}}>{item.likes.length}</i>
+            }
+
+           {item.postedBy._id == state._id
+            && 
+            <i style={{ padding:"10px", fontSize:"20px" }} className="now-ui-icons files_box" onClick={()=>deletePost(item._id)}></i>
+           }
+
+            <CardTitle tag="h4">{item.question6 + " " + item.question7}</CardTitle>
+            {item.house_struct + ", " + item.house_type}
+            
+            <CardText>
+                {"Rs " + item.question3}
+                <h6> - <Link to={item.postedBy._id !== state._id ? "/profile/"+item.postedBy._id :"/profile/"}>{item.postedBy.fullName}</Link></h6>
+            </CardText>
+            
+            </CardBody>
+        </Card>
+
+        )
+            })
+        }
+
         
         </Col>
         </Row>
+        
         </Container>
         </>
+
+        : 
+        <Container>
+        
+        <Row>
+
+        <Col className="ml-auto mr-auto" md="12" style={{ textAlign:"center" }}>
+        <i style={{ marginLeft:"auto", marginRight:"auto", marginTop:"200px", fontSize:"200px" }} className="now-ui-icons loader_refresh"></i>
+        <h2 style={{  marginBottom:"200px" }}>Loading...</h2>
+        </Col>
+        </Row>
+        </Container>
+        }
          
         </div>
         <DarkFooter />
